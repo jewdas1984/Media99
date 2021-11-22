@@ -1,0 +1,39 @@
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+  - name: configure top level configuration
+    cisco.ios.ios_config:
+      lines: hostname ZAEBOZ
+
+  - name: configure interface settings
+    cisco.ios.ios_config:
+      lines:
+      - description test interface
+      - ip address 172.2.2.2 255.255.255.0
+      parents: interface GigabitEthernet2
+
+  - name: load new acl into device
+    cisco.ios.ios_config:
+      lines:
+      - 10 permit ip host 192.0.2.1 any log
+      - 20 permit ip host 192.0.2.2 any log
+      - 30 permit ip host 192.0.2.3 any log
+      - 40 permit ip host 192.0.2.4 any log
+      - 50 permit ip host 192.0.2.5 any log
+      parents: ip access-list extended test1
+      before: no ip access-list extended test1
+      match: exact
+
+  - name: save running to startup when modified
+    cisco.ios.ios_config:
+      save_when: modified
+
+  - name: for idempotency, use full-form commands
+    cisco.ios.ios_config:
+      lines:
+        # - shut
+      - shutdown
+      # parents: int gig1/0/11
+      parents: interface GigabitEthernet3
