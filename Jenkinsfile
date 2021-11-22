@@ -6,7 +6,7 @@ pipeline{
 				git branch: 'master', url: 'https://github.com/jewdas1984/Media99.git'
 			}
 		}
-    	stage('Setup'){
+    	stage('Setup!'){
       		steps{
 				sh 'chmod +x install.sh'
         		sh './install.sh'
