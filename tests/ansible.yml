@@ -44,11 +44,11 @@
 
   tasks:
   - name: configure top level configuration and save it
-  cisco.nxos.nxos_config:
+  nxos_config:
     lines: hostname CHECK321
     save_when: modified
 
-- cisco.nxos.nxos_config:
+- nxos_config:
     lines:
     - 10 permit ip 192.0.2.1/32 any log
     - 20 permit ip 192.0.2.2/32 any log
@@ -59,7 +59,7 @@
     before: no ip access-list test
     match: exact
 
-- cisco.nxos.nxos_config:
+- nxos_config:
     lines:
     - 10 permit ip 192.0.2.1/32 any log
     - 20 permit ip 192.0.2.2/32 any log
@@ -70,7 +70,7 @@
     replace: block
 
 - name: for idempotency, use full-form commands
-  cisco.nxos.nxos_config:
+  nxos_config:
     lines:
       # - shut
     - shutdown
