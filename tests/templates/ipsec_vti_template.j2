@@ -35,5 +35,5 @@ interface Loopback0
 
 router eigrp 10
   no auto-summary
-  network {{ r1_loopback0 }} 0.0.0.255
-  network {{ r1_tunnel12 }} 0.0.0.255
+  network {{ r1_loopback0.split"."[0-2] }} 0.0.0.255
+  network {{ r1_tunnel12.split"."[0-2] }} 0.0.0.255
