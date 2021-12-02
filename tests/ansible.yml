@@ -45,7 +45,7 @@
 
   - name: print received configuration to stdout
     debug:
-      msg: {{ cli_result }}
+      msg: "{{ cli_result }}"
 
   - name: "TASK 3: Create outputs/ folder"
     file:
