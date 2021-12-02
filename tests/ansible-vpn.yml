@@ -5,7 +5,7 @@
   tasks:
     - name: "Applying S2S VPN configuration using SVTI"
       ios_config: 
-        src: "ipsec_vti_template.j2"
+        src: "templates/ipsec_vti_template.j2"
         save_when: changed
       notify: config_changed
       register: cli_result

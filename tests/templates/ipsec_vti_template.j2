@@ -26,7 +26,7 @@ interface Tunnel 12
   tunnel source GigabitEthernet0/0
   tunnel destination {{ remote_address }}
   tunnel protection ipsec profile VTI-IPSEC-PROF
-  ip address {{ tunnel_address }} 255.255.255.0
+  ip address {{ r1_tunnel12 }} 255.255.255.0
   no shutdown
 
 interface Loopback0
