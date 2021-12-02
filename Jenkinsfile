@@ -8,7 +8,7 @@ pipeline{
 		}
    		stage('invoke playbook'){
 			steps{
-				ansiblePlaybook credentialsId: 'default_cisco', installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: './tests/ansible.yml'	}
+				ansiblePlaybook credentialsId: 'default_cisco', installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: './tests/ansible-vpn.yml'	}
    		}
 	}
 }
