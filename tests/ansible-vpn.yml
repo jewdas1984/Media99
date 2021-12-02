@@ -1,0 +1,12 @@
+- hosts: routers
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: "Applying S2S VPN configuration using SVTI"
+      ios_config: 
+        src: "ipsec_vti_template.j2"
+        save_when: changed
+      notify: config_changed
+      register: cli_result
+  

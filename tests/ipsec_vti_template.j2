@@ -1,0 +1,39 @@
+crypto keyring VTI-KEYRING
+  pre-shared-key address {{ remote_address }} key mysecretkey
+
+crypto isakmp policy 10
+  authentication pre-share
+  encryption 3des
+  hash md5
+  group 2
+  lifetime 86400
+
+crypto isakmp profile VTI-ISAKMP-PROF
+  match identity address {{ remote_address }}
+  keyring VTI-KEYRING
+
+crypto ipsec transform-set ESP-3DES-MD5 esp-3des esp-md5-hmac
+  mode transport
+
+crypto ipsec profile VTI-IPSEC-PROF
+  set transform-set ESP-3DES-MD5
+  set security-association lifetime seconds 28800
+  set isakmp-profile VTI-ISAKMP-PROF
+  set pfs group2
+
+interface Tunnel 12
+  tunnel mode gre ip
+  tunnel source GigabitEthernet0/0
+  tunnel destination {{ remote_address }}
+  tunnel protection ipsec profile VTI-IPSEC-PROF
+  ip address {{ tunnel_address }} 255.255.255.0
+  no shutdown
+
+interface Loopback0
+  ip address {{ r1_loopback0 }} 255.255.255.0
+  no shutdown
+
+router eigrp 10
+  no auto-summary
+  network {{ r1_loopback0 }} 0.0.0.255
+  network {{ r1_tunnel12 }} 0.0.0.255
