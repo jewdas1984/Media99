@@ -40,8 +40,8 @@
 
   - name: print running configuration and save it in a variable
     ios_command:
-      commands: "show running-config"
-      register: cli_result
+      commands: show running-config
+    register: cli_result
 
   - name: print received configuration to stdout
     debug:
