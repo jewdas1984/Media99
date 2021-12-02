@@ -40,7 +40,10 @@
 
   - name: print running configuration and save it in a variable
     ios_command:
-      commands: show running-config
+      commands: 
+      - show running-config
+      - show ver
+      - show clock
     register: cli_result
 
   - name: print received configuration to stdout
