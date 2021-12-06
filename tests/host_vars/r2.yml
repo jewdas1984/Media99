@@ -1,3 +1,4 @@
+hostname: "R2"
 remote_address: "172.26.100.101"
-r1_tunnel12: "10.10.10.102"
-r1_loopback0: "2.2.2.2"
+tunnel12: "10.10.10.102"
+loopback0: "2.2.2.2"

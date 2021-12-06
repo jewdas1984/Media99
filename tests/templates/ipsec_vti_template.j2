@@ -1,3 +1,5 @@
+hostname {{ hostname }}
+
 crypto keyring VTI-KEYRING
   pre-shared-key address {{ remote_address }} key mysecretkey
 
@@ -26,14 +28,14 @@ interface Tunnel 12
   tunnel source GigabitEthernet0/0
   tunnel destination {{ remote_address }}
   tunnel protection ipsec profile VTI-IPSEC-PROF
-  ip address {{ r1_tunnel12 }} 255.255.255.0
+  ip address {{ tunnel12 }} 255.255.255.0
   no shutdown
 
 interface Loopback0
-  ip address {{ r1_loopback0 }} 255.255.255.0
+  ip address {{ loopback0 }} 255.255.255.0
   no shutdown
 
 router eigrp 10
   no auto-summary
-  network {{ r1_loopback0 }} 0.0.0.255
-  network {{ r1_tunnel12 }} 0.0.0.255
+  network {{ loopback0 }} 0.0.0.255
+  network {{ tunnel12 }} 0.0.0.255
