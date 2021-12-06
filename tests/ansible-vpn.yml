@@ -15,9 +15,9 @@
           ios_command:
             command: "show crypto session"
           register: "s2svpn_status"
-          until: "'UP-ACTIVE' in s2svpn_status.stdout"
-          retries: 10
-          delay: 2
+        - name: "Print IPSEC status output as dict"
+          debug: 
+            msg: "s2svpn_status"
         - name: "Check IKEv1 SA status to {{ remote_address }}"
           ios_command:
             command: "show crypto ikev1 sa remote {{ remote_address }}"
