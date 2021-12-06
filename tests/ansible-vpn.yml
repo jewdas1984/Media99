@@ -13,21 +13,21 @@
       block:
         - name: "Checking overall status of VPN"
           ios_command:
-            command: "show crypto session"
+            commands: "show crypto session"
           register: "s2svpn_status"
         - name: "Print IPSEC status output as dict"
           debug: 
             msg: "s2svpn_status"
         - name: "Check IKEv1 SA status to {{ remote_address }}"
           ios_command:
-            command: "show crypto ikev1 sa remote {{ remote_address }}"
+            commands: "show crypto ikev1 sa remote {{ remote_address }}"
           register: "s2svpn_status_ike"
           until: "'READY' in s2svpn_status_ike.stdout"
           retries: 10
           delay: 2
         - name: "Check IPSEC SA status to {{ remote_address }}"
           ios_command:
-            command: "show crypto ipsec sa peer {{ remote_address }}"
+            commands: "show crypto ipsec sa peer {{ remote_address }}"
           register: "s2svpn_status_ipsec"
           until: "'READY' in s2svpn_status_ipsec.stdout"
           retries: 10
