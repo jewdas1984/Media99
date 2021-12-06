@@ -17,7 +17,7 @@
           register: "s2svpn_status"
         - name: "Print IPSEC status output as dict"
           debug: 
-            msg: "{{ s2svpn_status.'Session status'}} "
+            msg: "{{ s2svpn_status['Session status']}} "
         - name: "Check IKEv1 SA status to {{ remote_address }}"
           ios_command:
             commands: "show crypto ikev1 sa remote {{ remote_address }}"
