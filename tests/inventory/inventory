@@ -1,3 +1,13 @@
-[routers]
+[routers-ios-xe]
 r1 ansible_host=192.168.100.200 ansible_user=cisco ansible_password=Cisco123
 r2 ansible_host=192.168.100.206 ansible_user=cisco ansible_password=Cisco123
+[switches-nxos]
+sw1 ansible_host=192.168.100.201 ansible_user=cisco ansible_password=Cisco123
+[switches-ios]
+sw2 ansible_host=192.168.100.202 ansible_user=cisco ansible_password=Cisco123
+[firewalls-srx]
+srx1 ansible_host=192.168.100.203 ansible_user=cisco ansible_password=Cisco123
+[firewalls-asa]
+asa1 ansible_host=192.168.100.204 ansible_user=cisco ansible_password=Cisco123
+[routers-junos]
+vnx1 ansible_host=192.168.100.205 ansible_user=cisco ansible_password=Cisco123
