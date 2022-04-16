@@ -17,11 +17,11 @@
             commands: "show crypto session"
           register: "s2svpn_status"
         - name: "Print IPSEC status output as dict"
-          until: "'UP-ACTIVE' in s2svpn_status['stdout']"
-          retries: 10
-          delay: 2
+          #until: "'UP-ACTIVE' in s2svpn_status['stdout']"
+          #retries: 10
+          #delay: 2
           debug: 
-            msg: "{{ s2svpn_status['stdout_lines']['Session status'] }}"
+            var=s2svpn_status.stdout_lines
         - name: "Check IKEv1 SA status to {{ remote_address }}"
           ios_command:
             commands: "show crypto ikev1 sa remote {{ remote_address }}"
