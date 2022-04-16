@@ -21,7 +21,7 @@
           #retries: 10
           #delay: 2
           debug: 
-            var=s2svpn_status.stdout_lines
+            msg: {{ s2svpn_status|json_query }}
         - name: "Check IKEv1 SA status to {{ remote_address }}"
           ios_command:
             commands: "show crypto ikev1 sa remote {{ remote_address }}"
