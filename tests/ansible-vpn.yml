@@ -1,6 +1,6 @@
 - hosts: routers-ios-xe
   connection: network_cli
-  become_method: enable
+  become: yes
   gather_facts: false
 
   tasks:
