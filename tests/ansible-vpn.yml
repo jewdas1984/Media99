@@ -1,4 +1,4 @@
-- hosts: routers
+- hosts: routers-ios-xe
   connection: network_cli
   gather_facts: false
 
