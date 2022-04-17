@@ -17,7 +17,7 @@
       block:
         - name: "Checking overall status of VPN"
           ios_command:
-            commands: "show crypto session"
+            commands: "show version"
           register: s2svpn_status
         - name: "Debug Genie Filter"
           debug:
