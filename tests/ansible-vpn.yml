@@ -18,10 +18,10 @@
         - name: "Checking overall status of VPN"
           ios_command:
             commands: "show crypto session"
-          register: "s2svpn_status"
+          register: s2svpn_status
         - name: "Debug Genie Filter"
           debug:
-            msg: "{{ cli_result | parse_genie(command='show crypto session', os='iosxe') }}"
+            msg: "{{ s2svpn_status | parse_genie(command='show crypto session', os='iosxe') }}"
         - name: "Print IPSEC status output as dict"
           #until: "'UP-ACTIVE' in s2svpn_status['stdout']"
           #retries: 10
