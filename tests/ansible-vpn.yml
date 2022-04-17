@@ -26,9 +26,9 @@
           #until: "'UP-ACTIVE' in s2svpn_status['stdout']"
           #retries: 10
           #delay: 2
-          debug: 
-            msg: "{{ s2svpn_status.item.["session status"] }}"
-            with_items: "{{ s2svpn_status.results }}"
+          #debug: 
+            #msg: "{{ s2svpn_status.item.["session status"] }}"
+            #with_items: "{{ s2svpn_status.results }}"
         - name: "Check IKEv1 SA status to {{ remote_address }}"
           ios_command:
             commands: "show crypto ikev1 sa remote {{ remote_address }}"
