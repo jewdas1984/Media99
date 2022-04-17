@@ -21,7 +21,7 @@
           #retries: 10
           #delay: 2
           debug: 
-            msg: "{{ s2svpn_status.item."session status" }}"
+            msg: "{{ s2svpn_status.item.["session status"] }}"
             with_items: "{{ s2svpn_status.results }}"
         - name: "Check IKEv1 SA status to {{ remote_address }}"
           ios_command:
