@@ -11,8 +11,8 @@
       notify: config_changed
       register: cli_result
     - name: Read in parse_genie role
-	      include_role:
-	        name: clay584.parse_genie
+	    include_role:
+	      name: clay584.parse_genie
     - name: "Checking S2S tunnel is properly built"  
       block:
         - name: "Checking overall status of VPN"
