@@ -10,25 +10,15 @@
         save_when: changed
       notify: config_changed
       register: cli_result
-    - name: "Read in parse_genie role"
-      include_role:
-        name: clay584.parse_genie
     - name: "Checking S2S tunnel is properly built"  
       block:
-        - name: "Checking overall status of VPN"
-          ios_command:
-            commands: "show version"
-          register: s2svpn_status
-        - name: "Debug Genie Filter"
-          debug:
-            msg: "{{ s2svpn_status | parse_genie(command='show version', os='iosxe') }}"
-        #- name: "Print IPSEC status output as dict"
-          #until: "'UP-ACTIVE' in s2svpn_status['stdout']"
-          #retries: 10
-          #delay: 2
-          #debug: 
-            #msg: "{{ s2svpn_status.item.["session status"] }}"
-            #with_items: "{{ s2svpn_status.results }}"
+        - name: "Print IPSEC status output as dict"
+          until: "'UP-ACTIVE' in s2svpn_status['stdout']"
+          retries: 10
+          delay: 2
+          debug: 
+            msg: "{{ s2svpn_status.item.["session status"] }}"
+            with_items: "{{ s2svpn_status.results }}"
         - name: "Check IKEv1 SA status to {{ remote_address }}"
           ios_command:
             commands: "show crypto ikev1 sa remote {{ remote_address }}"
