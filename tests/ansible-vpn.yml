@@ -8,7 +8,6 @@
       ios_config: 
         src: "templates/ipsec_vti_template.j2"
         save_when: changed
-      notify: config_changed
       register: cli_result
     - name: "Checking S2S tunnel is properly built"
       ansible.netcommon.cli_command:
