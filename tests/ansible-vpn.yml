@@ -10,28 +10,17 @@
         save_when: changed
       notify: config_changed
       register: cli_result
-    - name: "Checking S2S tunnel is properly built"  
-      block:
-        - name: "Print IPSEC status output as dict"
-          until: "'UP-ACTIVE' in s2svpn_status['stdout']"
-          retries: 10
-          delay: 2
-        - name: "Check IKEv1 SA status to {{ remote_address }}"
-          ios_command:
-            commands: "show crypto ikev1 sa remote {{ remote_address }}"
-          register: "s2svpn_status_ike"
-          until: "'READY' in s2svpn_status_ike.stdout"
-          retries: 10
-          delay: 2
-        - name: "Check IPSEC SA status to {{ remote_address }}"
-          ios_command:
-            commands: "show crypto ipsec sa peer {{ remote_address }}"
-          register: "s2svpn_status_ipsec"
-          until: "'READY' in s2svpn_status_ipsec.stdout"
-          retries: 10
-          delay: 2
-  handlers:
-    - name: "HANDLER 1: Display relevant changes"
-      listen: config_changed
-      debug:
-        msg: "{{ cli_result.commands }}"
+    - name: "Checking S2S tunnel is properly built"
+      ansible.netcommon.cli_command:
+        command: "show crypto ikev2 sa remote {{ tunnel12 }}"
+        register: "ikev2_check"
+        until: "'READY' in ikev2_check.stdout"
+        retries: 10
+        delay: 2
+    - name: "Check IPsec SA status to {{ tunnel12 }}"
+      ansible.netcommon.cli_command:
+        command: "show crypto ipsec sa peer {{ tunnel12 }}"
+        register: "ipsec_check"
+        until: "'Status: ACTIVE(ACTIVE)' in ipsec_check.stdout"
+        retries: 3
+        delay: 1
