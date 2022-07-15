@@ -13,15 +13,15 @@
       ios_command:
         commands: 
             - show crypto ikev2 sa remote {{ tunnel12 }}
-        register: "ikev2_check"
-        until: "'READY' in ikev2_check.stdout"
-        retries: 10
-        delay: 2
+        #register: "ikev2_check"
+        #until: "'READY' in ikev2_check.stdout"
+        #retries: 10
+        #delay: 2
     - name: "Check IPsec SA status to {{ tunnel12 }}"
       ios_command:
         commands:
             - show crypto ipsec sa peer {{ tunnel12 }}
-        register: "ipsec_check"
-        until: "'Status: ACTIVE(ACTIVE)' in ipsec_check.stdout"
-        retries: 3
-        delay: 1
+        #register: "ipsec_check"
+        #until: "'Status: ACTIVE(ACTIVE)' in ipsec_check.stdout"
+        #retries: 3
+        #delay: 1
